@@ -1,14 +1,15 @@
 import { Header } from 'components';
 import { CountrySearch, Home, Country } from 'pages';
 import { Route, Routes } from 'react-router-dom';
+import { routes } from 'routes';
 
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Header />}>
+      <Route path={routes.HOME} element={<Header />}>
         <Route index element={<Home />} />
-        <Route path="/country" element={<CountrySearch />} />
-        <Route path="/country/:countryId" element={<Country />} />
+        <Route path={routes.COUNTRY} element={<CountrySearch />} />
+        <Route path={routes.COUNTRY_ID} element={<Country />} />
       </Route>
     </Routes>
   );
