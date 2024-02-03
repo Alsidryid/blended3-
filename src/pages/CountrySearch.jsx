@@ -10,16 +10,15 @@ import { useEffect, useState } from 'react';
 import { fetchByRegion } from 'service/country-service';
 
 export const CountrySearch = () => {
-
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [region, setRegion] = useState("");
+  const [region, setRegion] = useState('');
 
-  const handleSearch = (region) => {
+  const handleSearch = region => {
     setRegion(region);
     setError(null);
-}
+  };
 
   useEffect(() => {
     if (!region) return;
@@ -27,28 +26,24 @@ export const CountrySearch = () => {
     const fethCountries = async () => {
       setLoading(true);
       try {
-
         const data = await fetchByRegion(region);
         setCountries(data);
         // console.log(data);
       } catch (error) {
-        setError(error.message)
-      }
-      finally {
-        setLoading(false)
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
     fethCountries();
-  },[region])
+  }, [region]);
   return (
     <Section>
       <Container>
-        {error && <Heading>{error}
-        </Heading>
-}
-        {loading && <Loader/>}
+        {error && <Heading>{error}</Heading>}
+        {loading && <Loader />}
         <SearchForm handleSearch={handleSearch} />
-        <CountryList countries={ countries} />
+        <CountryList countries={countries} />
       </Container>
     </Section>
   );
